@@ -13,32 +13,32 @@ curr_version=$(jq -r '.version' "$build_info")
 # - On Fedora: fedora
 # - On Ubuntu: ubuntu
 # - On Raspbian: raspbian
-function get_distro() {
-    if [[ -f /etc/os-release ]]
-    then
-        # On Linux systems
-        source /etc/os-release
-        echo $ID
-    else
-        # On systems other than Linux (e.g. Mac or FreeBSD)
-        uname
-    fi
-}
+# function get_distro() {
+#     if [[ -f /etc/os-release ]]
+#     then
+#         # On Linux systems
+#         source /etc/os-release
+#         echo $ID
+#     else
+#         # On systems other than Linux (e.g. Mac or FreeBSD)
+#         uname
+#     fi
+# }
 
-case $(get_distro) in
-    case raspbian)
-        echo This is Raspbian
-        ;;
-    case fedora)
-        echo This is Fedora
-        ;;
-    case ubuntu)
-        echo This is Ubuntu
-        ;;
-    case Darwin)
-        echo This is macOS
-        ;;
-esac
+# case $(get_distro) in
+#     case raspbian)
+#         echo This is Raspbian
+#         ;;
+#     case fedora)
+#         echo This is Fedora
+#         ;;
+#     case ubuntu)
+#         echo This is Ubuntu
+#         ;;
+#     case Darwin)
+#         echo This is macOS
+#         ;;
+# esac
 
 if [[ "${curr_version##*.}" -lt "${deb_version##*.}" ]]; then
 	sudo apt install /tmp/discord.deb
